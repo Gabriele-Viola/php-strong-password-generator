@@ -1,12 +1,26 @@
 <?php
+
 $lenght = isset($_GET['long']) ? $_GET['long'] : 0;
 
 function generate(int $lenghtPass)
 {
+    $randomUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $randomLower = "abcdefghijklmnopqrstuvwxyz";
+    $randomSymbol = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
+    $randomNumb = "0123456789";
 
     do {
+        $type = rand(1, 4);
         static $counter = 0;
-        $generated[$counter - 1] = rand(0, 9);
+        if ($type == 1) {
+            $generated[$counter - 1] = $randomUpper[rand(0, strlen($randomUpper) - 1)];
+        } elseif ($type == 2) {
+            $generated[$counter - 1] = $randomLower[rand(0, strlen($randomLower) - 1)];
+        } elseif ($type == 3) {
+            $generated[$counter - 1] = $randomSymbol[rand(0, strlen($randomSymbol) - 1)];
+        } else {
+            $generated[$counter - 1] = $randomNumb[rand(0, strlen($randomNumb) - 1)];
+        }
         $counter++;
         $password = implode("", $generated);
     } while ($counter <= $lenghtPass);
