@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
+
 if (isset($_SESSION['condition'])) {
     foreach ($_SESSION['condition'] as $key => $value)
 

@@ -3,7 +3,6 @@ include_once 'functions.php';
 
 
 $_error = false;
-$errorConditions = false;
 $conditions = [
     'upper' => isset($_GET['upper']) && $_GET['upper'] === 'on' ? true : false,
     'lower' => isset($_GET['lower']) && $_GET['lower'] === 'on' ? true : false,
@@ -11,16 +10,10 @@ $conditions = [
     'symbol' => isset($_GET['symbol']) && $_GET['symbol'] === 'on' ? true : false,
 ];
 $_SESSION['condition'] = $conditions;
-if (isset($_GET['long']) && $_GET['long'] >= 5) {
-    $_SESSION['long'] = (int) $_GET['long'];
-    $_error = false;
-    header("Location: ./show.php");
-} elseif (isset($_GET['long']) && $_GET['long'] < 5) {
-    $_error = 'la password deve essere almeno di 5 caratteri';
-    $_SESSION['short'] = (int) $_GET['long'];
-}
+
+
 $verify = 0;
-foreach ($_SESSION['condition'] as $key => $value) {
+foreach ($conditions as $key => $value) {
     if ($value == False) {
         $verify++;
     }
@@ -28,7 +21,20 @@ foreach ($_SESSION['condition'] as $key => $value) {
 
 if ($verify == 4) {
     $errorConditions = 'Seleziona almeno una condizione';
+} else {
+    $errorConditions = false;
+
+    if (isset($_GET['long']) && $_GET['long'] >= 5) {
+        $_SESSION['long'] = (int) $_GET['long'];
+        $_error = false;
+        header("Location: ./show.php");
+    } elseif (isset($_GET['long']) && $_GET['long'] < 5) {
+        $_error = 'la password deve essere almeno di 5 caratteri';
+        $_SESSION['short'] = (int) $_GET['long'];
+    }
 }
+
+
 
 
 
@@ -53,35 +59,60 @@ if ($verify == 4) {
 </head>
 
 <body>
+    <div class="container">
+        <div class="row">
 
-    <h1>password generator</h1>
-    <form action="" class="form-control">
-        <label class="form-label" for="long">Lunghezza della password</label>
-        <input type="number" id="long" name="long">
-        <label class="form-label" for="upper">Lettere Maiuscole</label>
-        <input type="checkbox" id="upper" name="upper">
-        <label class="form-label" for="lower">Lettere Minuscole</label>
-        <input type="checkbox" id="lower" name="lower">
-        <label class="form-label" for="number">Numeri</label>
-        <input type="checkbox" id="number" name="number">
-        <label class="form-label" for="symbol">Simboli</label>
-        <input type="checkbox" id="symbol" name="symbol">
+            <div class="card p-5">
+                <h1 class="text-uppercase text-center mb-3">password generator</h1>
 
-        <button type="submit">invio</button>
-    </form>
+                <form action="" class="form-control mb-4 ">
+                    <div class="d-flex justify-content-between mb-3">
 
-    <p>
-        <?php
-        echo $_error ? $_error : '';
+                        <label class="form-label" for="long">Lunghezza della password</label>
+                        <input class="form-control w-25 text-end" type="number" id="long" name="long">
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <label class="form-label" for="upper">Lettere Maiuscole</label>
+                        <input class="form-check-input" type="checkbox" id="upper" name="upper">
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <label class="form-label" for="lower">Lettere Minuscole</label>
+                        <input type="checkbox" class="form-check-input" id="lower" name="lower">
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <label class="form-label" for="number">Numeri</label>
+                        <input type="checkbox" class="form-check-input" id="number" name="number">
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <label class="form-label" for="symbol">Simboli</label>
+                        <input type="checkbox" class="form-check-input" id="symbol" name="symbol">
+                    </div>
+                    <div class="text-end">
 
-        ?>
-    </p>
-    <p>
-        <?php
-        echo $errorConditions ? $errorConditions : '';
+                        <button type="submit" class="btn btn-success">invio</button>
+                    </div>
+                </form>
+                <div class="d-flex align-items-end flex-column">
 
-        ?>
-    </p>
+                    <p class="bg-danger text-light w-25 rounded p-2">
+                        <?php
+                        echo $errorConditions ? $errorConditions : '';
+
+                        ?>
+                    </p>
+                    <p class="bg-danger text-light w-25 rounded ">
+                        <?php
+                        echo $_error ? $_error : '';
+
+                        ?>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 
 
 </body>
