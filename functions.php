@@ -1,8 +1,14 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$long_request = 0;
-if (isset($_GET['long']) && isset($_GET['long']) > 0) {
-    $long_request = $_GET['long'];
+
+if (isset($_GET['long']) && $_GET['long'] >= 5) {
+    $_SESSION['long'] = (int) $_GET['long'];
+    header("Location: ./show.php");
+} elseif (isset($_GET['long']) && $_GET['long'] < 5) {
+    $_SESSION['err'] = 'la password deve essere almeno di 5 caratteri';
 }
 
 function generate(int $lenghtPass)
@@ -34,4 +40,5 @@ function generate(int $lenghtPass)
         };
         return $password;
     }
+    header('Location: ./show.php');
 }

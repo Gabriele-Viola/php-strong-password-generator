@@ -1,6 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['long'])) {
+    header("Location: ./index.php");
+}
 include_once 'functions.php';
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,24 +25,23 @@ include_once 'functions.php';
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous" />
 </head>
+<h1>
+    password generata correttamente
+</h1>
+<p>
+    la password generata è:
+</p>
+<p>
+    <?php echo generate($_SESSION['long']); ?>
+</p>
 
 <body>
-
-    <h1>password generator</h1>
-    <form action="">
-        <label for="long">Lunghezza della password</label>
-        <input type="number" id="long" name="long">
-        <button type="submit">invio</button>
-    </form>
-
-    <p>
-        <?php
-        echo isset($_SESSION['err']) ? $_SESSION['err'] : '';
-
-        ?>
-    </p>
 
 
 </body>
 
 </html>
+<?php
+session_unset();
+session_destroy();
+?>
