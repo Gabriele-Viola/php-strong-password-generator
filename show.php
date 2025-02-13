@@ -1,11 +1,12 @@
 <?php
+include_once 'functions.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['long'])) {
     header("Location: ./index.php");
 }
-include_once 'functions.php';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,7 +33,7 @@ include_once 'functions.php';
     la password generata è:
 </p>
 <p>
-    <?php echo generate($_SESSION['long']); ?>
+    <?php echo generate($_SESSION['long'], $_SESSION['condition']); ?>
 </p>
 
 <body>
