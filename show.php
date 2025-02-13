@@ -26,15 +26,24 @@ if (!isset($_SESSION['long'])) {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous" />
 </head>
-<h1>
-    password generata correttamente
-</h1>
-<p>
-    la password generata è:
-</p>
-<p>
-    <?php echo generate($_SESSION['long'], $_SESSION['condition']); ?>
-</p>
+<div class="container">
+    <div class="card mt-5 shadow">
+        <h1 class="text-center mb-3 text-uppercase text-success">
+            password generata correttamente
+        </h1>
+
+        <div class="text-center mb-3 text-uppercase">
+            la password generata è:
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <div class="text-center mb-3 bg-success p-4 rounded shadow text-light w-50">
+                <?php echo generate($_SESSION['long'], $_SESSION['condition']); ?>
+            </div>
+        </div>
+        <a class="text-decoration-none text-primary my-3 text-center" href="./index.php">Cambia parametri</a>
+    </div>
+</div>
 
 <body>
 

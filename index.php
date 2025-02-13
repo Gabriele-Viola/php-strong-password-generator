@@ -61,7 +61,7 @@ if (isset($_GET['long']) && $_GET['long'] >= 5) {
     <div class="container">
         <div class="row">
 
-            <div class="card p-5">
+            <div class="card p-5 shadow mt-5">
                 <h1 class="text-uppercase text-center mb-3">password generator</h1>
 
                 <form action="" class="form-control mb-4 ">
