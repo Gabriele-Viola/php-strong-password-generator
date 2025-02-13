@@ -27,7 +27,6 @@ function generate(int $lenghtPass, $conditions)
     $randomNumb = "0123456789";
 
     $counter = 0;
-    // $types = [$randomUpper,$randomLower,$randomSymbol,$randomNumb];
 
     $generated = [];
     while ($counter < $lenghtPass) {

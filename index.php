@@ -19,23 +19,22 @@ foreach ($conditions as $key => $value) {
     }
 }
 
-if ($verify == 4) {
-    $errorConditions = 'Seleziona almeno una condizione';
-} else {
-    $errorConditions = false;
 
-    if (isset($_GET['long']) && $_GET['long'] >= 5) {
-        $_SESSION['long'] = (int) $_GET['long'];
-        $_error = false;
+$errorConditions = false;
+
+if (isset($_GET['long']) && $_GET['long'] >= 5) {
+    $_SESSION['long'] = (int) $_GET['long'];
+    $_error = false;
+    if ($verify == 4) {
+        $errorConditions = 'Seleziona almeno una condizione';
+    } else {
+        $errorConditions = false;
         header("Location: ./show.php");
-    } elseif (isset($_GET['long']) && $_GET['long'] < 5) {
-        $_error = 'la password deve essere almeno di 5 caratteri';
-        $_SESSION['short'] = (int) $_GET['long'];
     }
+} elseif (isset($_GET['long']) && $_GET['long'] < 5) {
+    $_error = 'la password deve essere almeno di 5 caratteri';
+    $_SESSION['short'] = (int) $_GET['long'];
 }
-
-
-
 
 
 ?>
@@ -94,7 +93,7 @@ if ($verify == 4) {
                 </form>
                 <div class="d-flex align-items-end flex-column">
 
-                    <p class="bg-danger text-light w-25 rounded p-2">
+                    <p class="bg-danger text-light w-25 rounded">
                         <?php
                         echo $errorConditions ? $errorConditions : '';
 
