@@ -31,14 +31,14 @@ include_once 'functions.php';
 
     <p>
         <?php
-        echo $lenght;
+        echo $long_request;
 
         ?>
     </p>
     <p>
         <?php
         // var_dump(generate($lenght));
-        echo generate($lenght);
+        echo generate($long_request);
         ?>
     </p>
 

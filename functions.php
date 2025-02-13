@@ -1,6 +1,9 @@
 <?php
 
-$lenght = isset($_GET['long']) ? $_GET['long'] : 0;
+$long_request = 0;
+if (isset($_GET['long']) && isset($_GET['long']) > 0) {
+    $long_request = $_GET['long'];
+}
 
 function generate(int $lenghtPass)
 {
@@ -11,20 +14,24 @@ function generate(int $lenghtPass)
 
     $counter = 0;
 
+    if ($lenghtPass < 5) {
+        return $password = 'The Password must be almost 5 characther';
+    } else {
 
-    while ($counter < $lenghtPass) {
-        $type = rand(1, 4);
-        if ($type == 1) {
-            $generated[$counter] = $randomUpper[rand(0, strlen($randomUpper) - 1)];
-        } elseif ($type == 2) {
-            $generated[$counter] = $randomLower[rand(0, strlen($randomLower) - 1)];
-        } elseif ($type == 3) {
-            $generated[$counter] = $randomSymbol[rand(0, strlen($randomSymbol) - 1)];
-        } else {
-            $generated[$counter] = $randomNumb[rand(0, strlen($randomNumb) - 1)];
-        }
-        $password = implode("", $generated);
-        $counter++;
-    };
-    return $password;
+        while ($counter < $lenghtPass) {
+            $type = rand(1, 4);
+            if ($type == 1) {
+                $generated[$counter] = $randomUpper[rand(0, strlen($randomUpper) - 1)];
+            } elseif ($type == 2) {
+                $generated[$counter] = $randomLower[rand(0, strlen($randomLower) - 1)];
+            } elseif ($type == 3) {
+                $generated[$counter] = $randomSymbol[rand(0, strlen($randomSymbol) - 1)];
+            } else {
+                $generated[$counter] = $randomNumb[rand(0, strlen($randomNumb) - 1)];
+            }
+            $password = implode("", $generated);
+            $counter++;
+        };
+        return $password;
+    }
 }
