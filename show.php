@@ -25,6 +25,8 @@ if (!isset($_SESSION['long'])) {
         rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <div class="container">
     <div class="card mt-5 shadow">
@@ -37,8 +39,11 @@ if (!isset($_SESSION['long'])) {
         </div>
         <div class="d-flex justify-content-center">
 
-            <div class="text-center mb-3 bg-success p-4 rounded shadow text-light w-50">
-                <?php echo generate($_SESSION['long'], $_SESSION['condition']); ?>
+            <div class="text-center mb-3 bg-success p-4 rounded shadow text-light w-50 position-relative">
+                <button class="btn btn-secondary position-absolute top-0 start-100 translate-middle"><i class="fa-solid fa-copy"></i></button>
+                <div id=password>
+                    <?php echo generate($_SESSION['long'], $_SESSION['condition']); ?>
+                </div>
             </div>
         </div>
         <a class="text-decoration-none text-primary my-3 text-center" href="./index.php">Cambia parametri</a>
@@ -49,6 +54,7 @@ if (!isset($_SESSION['long'])) {
 
 
 </body>
+<script src="./asset/app.js"></script>
 
 </html>
 <?php
